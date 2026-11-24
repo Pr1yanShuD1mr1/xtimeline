@@ -21,16 +21,16 @@ Operate this tool exclusively on a dedicated test account, maintain low request 
 
 The `run.sh` script serves as a convenience wrapper around the manual commands documented below. 
 
-+---+---+
+|------------------|----------------------------------------------------------------------------------------------------|
 | Command          | Description                                                                                        |
-+---+---+
+|------------------|----------------------------------------------------------------------------------------------------|
 | ./run.sh setup   | Creates backend/.venv, installs backend and frontend dependencies, and copies .env.example to .env.|
 | ./run.sh session | Launches a browser window to authenticate with X and saves the session to .x_profile/.             |
 | ./run.sh start   | Builds frontend/dist if absent and serves the application on port 8000.                            |
 | ./run.sh dev     | Runs the backend and Vite development server concurrently (Ctrl-C terminates both).                |
 | ./run.sh test    | Executes backend tests, the frontend production build, and browser smoke tests.                    |
 | ./run.sh mongo   | Reports the status and contents of the history database (check_mongo.py).                          |
-+---+---+
+|------------------|----------------------------------------------------------------------------------------------------|
 
 ---
 
@@ -226,9 +226,9 @@ On the backend, `require_auth` accepts either token delivery method and validate
 
 All endpoints require authentication except `/api/health`, `/api/auth/login`, and `/api/auth/logout`.
 
-+--------+------------------------------+--------------------------------------------------------------------------+
+|--------|------------------------------|--------------------------------------------------------------------------|
 | Method | Path                         | Description                                                              |
-+--------+------------------------------+--------------------------------------------------------------------------+
+|--------|------------------------------|--------------------------------------------------------------------------|
 | POST   | /api/auth/login              | Accepts {password} and returns {token, expires_at}.                      |
 | GET    | /api/auth/me                 | Verifies whether the current token is valid.                             |
 | POST   | /api/auth/logout             | No-op endpoint (tokens are stateless and signed, not stored server-side).|
@@ -242,7 +242,7 @@ All endpoints require authentication except `/api/health`, `/api/auth/login`, an
 | GET    | /api/jobs/{id}/debug         | Returns a diagnostic screenshot captured by the browser.                 |
 | GET    | /api/session                 | Reports whether a saved X session exists and its age.                    |
 | GET    | /api/health                  | Public liveness probe.                                                   |
-+--------+------------------------------+--------------------------------------------------------------------------+
+|--------|------------------------------|--------------------------------------------------------------------------|
 
 
 ### Scrape Request Payload
@@ -256,9 +256,9 @@ All endpoints require authentication except `/api/health`, `/api/auth/login`, an
   "limit": 200
 }
 ```
-+-------------------+------------------------------------------------------------------------------------------+
+|-------------------|------------------------------------------------------------------------------------------|
 | Field             | Description                                                                              |
-+-------------------+------------------------------------------------------------------------------------------+
+|-------------------|------------------------------------------------------------------------------------------|
 | handles           | One or more target accounts (array of strings, or a comma/space-delimited string).       |
 | start / end       | Inclusive date range in ISO 8601 format.                                                 |
 | strategy          | "search" (default), "profile", or "auto".                                                |
@@ -266,7 +266,7 @@ All endpoints require authentication except `/api/health`, `/api/auth/login`, an
 | max_scrolls       | Maximum scroll iterations per account (default 60).                                      |
 | headed            | Launches a visible browser window to facilitate debugging.                               |
 | include_retweets  | Retains reposts of other users' content (default false).                                 |
-+-------------------+------------------------------------------------------------------------------------------+
+|-------------------|------------------------------------------------------------------------------------------|
 
 
 Supplying the deprecated `method` field (formerly used for `twscrape`) is **rejected** with a `422 Unprocessable Entity` response rather than silently ignored.
@@ -315,13 +315,13 @@ The startup log indicates the active storage backend, which is also exposed via 
 ```
 {"ok":true, ..., "store":"mongo"}
 ```
-+----------------------+-----------------------------------+--------------------------------------------------+
+|----------------------|-----------------------------------|--------------------------------------------------|
 | Variable             | Default                           | Description                                      |
-+----------------------+-----------------------------------+--------------------------------------------------+
+|----------------------|-----------------------------------|--------------------------------------------------|
 | XTIMELINE_MONGO_URI  | mongodb://127.0.0.1:27017         | MongoDB connection string.                       |
 | XTIMELINE_MONGO_DB   | xtimeline                         | Target database name.                            |
 | XTIMELINE_STORE      | auto                              | Storage mode: auto | mongo | memory.             |
-+----------------------+-----------------------------------+--------------------------------------------------+
+|----------------------|-----------------------------------|--------------------------------------------------|
 
 In `auto` mode, the application attempts to connect to MongoDB and falls back to in-memory storage with a warning if unavailable. 
 Setting `mongo` enforces database availability as a startup requirement; `memory` bypasses MongoDB entirely.
@@ -355,9 +355,9 @@ Database credentials within the URI are redacted prior to logging.
 
 All parameters below are configured via environment variables in `backend/.env` 
  Default values are intentionally conservative.
-+-----------------------------------------+----------------------------------+------------------------------------------------------------------+
+|-----------------------------------------|----------------------------------|------------------------------------------------------------------|
 | Variable                                | Default                          | Description                                                      |
-+-----------------------------------------+----------------------------------+------------------------------------------------------------------+
+|-----------------------------------------|----------------------------------|------------------------------------------------------------------|
 | XTIMELINE_PASSWORD                      | changeme                         | Application login password.                                      |
 | XTIMELINE_SECRET                        | Auto-generated file              | HMAC token signing key.                                          |
 | XTIMELINE_TOKEN_TTL_MIN                 | 720                              | Token validity duration in minutes.                              |
@@ -373,7 +373,7 @@ All parameters below are configured via environment variables in `backend/.env`
 | XTIMELINE_NAV_TIMEOUT_MS                | 60000                            | Page navigation timeout; slow loads are treated as non-fatal.    |
 | XTIMELINE_WAIT_TWEETS_MS                | 20000                            | Maximum wait time for the timeline DOM to render.                |
 | XTIMELINE_ACCOUNT_PAUSE_MIN_MS / _MAX_MS| 1500 / 3500                      | Randomized delay range between sequential accounts.              |
-+-----------------------------------------+----------------------------------+------------------------------------------------------------------+
+|-----------------------------------------|----------------------------------|------------------------------------------------------------------|
 
 
 **Adjusting post volume:** Configure **Max posts / account** (`limit`); a value of `0` removes the cap. When using the `profile` strategy, consider increasing **Max scrolls** as well. The loop terminates automatically once it encounters consecutive timestamps preceding the start date or reaches the per-account limit.

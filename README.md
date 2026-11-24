@@ -367,8 +367,7 @@ All parameters below are configured via environment variables in `backend/.env`
 | XTIMELINE_STORE                         | auto                             | Storage backend mode (auto, mongo, or memory).                   |
 | XTIMELINE_NO_CHANNEL                    | Disabled                         | Set to 1 to force the bundled headless shell.                    |
 | XTIMELINE_NO_SANDBOX                    | Disabled                         | Set to 1 in containerized environments requiring --no-sandbox.   |
-| XTIMELINE_SCROLL_DELAY_MS               | 1200                             | Delay in milliseconds after each scroll (increase if rate-       |
-|                                         |                                  | limited).                                                        |
+| XTIMELINE_SCROLL_DELAY_MS               | 1200                             | Delay in milliseconds after each scroll (increase if rate-limited).|
 | XTIMELINE_NAV_TIMEOUT_MS                | 60000                            | Page navigation timeout; slow loads are treated as non-fatal.    |
 | XTIMELINE_WAIT_TWEETS_MS                | 20000                            | Maximum wait time for the timeline DOM to render.                |
 | XTIMELINE_ACCOUNT_PAUSE_MIN_MS / _MAX_MS| 1500 / 3500                      | Randomized delay range between sequential accounts.              |

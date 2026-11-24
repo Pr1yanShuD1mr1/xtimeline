@@ -1,0 +1,19 @@
+# --- secrets / live login (never commit these) ---
+backend/x_state.json
+backend/.x_profile/
+backend/.auth_secret
+backend/accounts.db
+
+# --- generated ---
+backend/output/
+frontend/dist/
+frontend/node_modules/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+# --- configuration with credentials ---
+.env
+.env.*
+!.env.example

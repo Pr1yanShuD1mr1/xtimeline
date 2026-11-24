@@ -21,16 +21,16 @@ Operate this tool exclusively on a dedicated test account, maintain low request 
 
 The `run.sh` script serves as a convenience wrapper around the manual commands documented below. 
 
-+------------------+----------------------------------------------------------------------------------------------------+
++---+---+
 | Command          | Description                                                                                        |
-+------------------+----------------------------------------------------------------------------------------------------+
++---+---+
 | ./run.sh setup   | Creates backend/.venv, installs backend and frontend dependencies, and copies .env.example to .env.|
 | ./run.sh session | Launches a browser window to authenticate with X and saves the session to .x_profile/.             |
 | ./run.sh start   | Builds frontend/dist if absent and serves the application on port 8000.                            |
 | ./run.sh dev     | Runs the backend and Vite development server concurrently (Ctrl-C terminates both).                |
 | ./run.sh test    | Executes backend tests, the frontend production build, and browser smoke tests.                    |
 | ./run.sh mongo   | Reports the status and contents of the history database (check_mongo.py).                          |
-+------------------+----------------------------------------------------------------------------------------------------+
++---+---+
 
 ---
 
